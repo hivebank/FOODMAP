@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive world food map - Explore typical foods from every region">
+    <title>World Food Map</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🌍 World Food Map</h1>
+        <p>Discover typical foods from around the world and share your own!</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- World Map Section -->
+            <div class="map-container">
+                <svg viewBox="0 0 1000 500" class="world-map" id="worldMap">
+                    <!-- North America -->
+                    <path id="north-america" class="region" d="M 100 80 L 280 80 L 290 100 L 300 120 L 290 180 L 270 200 L 240 210 L 200 200 L 180 180 L 150 150 L 120 120 Z" data-region="North America" />
+
+                    <!-- South America -->
+                    <path id="south-america" class="region" d="M 250 250 L 280 230 L 300 250 L 310 290 L 300 350 L 280 380 L 260 390 L 240 380 L 230 340 L 240 290 Z" data-region="South America" />
+
+                    <!-- Europe -->
+                    <path id="europe" class="region" d="M 450 100 L 530 90 L 550 110 L 540 140 L 520 150 L 480 145 L 460 130 Z" data-region="Europe" />
+
+                    <!-- Africa -->
+                    <path id="africa" class="region" d="M 480 180 L 540 170 L 560 190 L 570 230 L 560 290 L 540 340 L 510 360 L 480 350 L 470 310 L 475 250 Z" data-region="Africa" />
+
+                    <!-- Middle East -->
+                    <path id="middle-east" class="region" d="M 560 160 L 620 155 L 640 175 L 635 210 L 610 220 L 580 210 L 565 190 Z" data-region="Middle East" />
+
+                    <!-- Asia -->
+                    <path id="asia" class="region" d="M 620 80 L 750 70 L 800 90 L 820 120 L 810 160 L 780 180 L 740 185 L 700 175 L 670 150 L 650 120 Z" data-region="Asia" />
+
+                    <!-- Southeast Asia -->
+                    <path id="southeast-asia" class="region" d="M 740 200 L 800 195 L 820 220 L 810 250 L 780 260 L 750 255 L 730 235 Z" data-region="Southeast Asia" />
+
+                    <!-- Oceania -->
+                    <path id="oceania" class="region" d="M 820 300 L 880 295 L 900 320 L 890 360 L 850 370 L 820 350 Z" data-region="Oceania" />
+                </svg>
+
+                <div class="map-legend">
+                    <h3>Click on a region to explore!</h3>
+                </div>
+            </div>
+
+            <!-- Food Details Panel -->
+            <div class="food-panel" id="foodPanel">
+                <div class="panel-header">
+                    <h2 id="regionName">Select a region</h2>
+                    <button class="close-btn" id="closePanel">&times;</button>
+                </div>
+
+                <div class="panel-content">
+                    <div class="typical-foods">
+                        <h3>Typical Foods</h3>
+                        <ul id="typicalFoodsList"></ul>
+                    </div>
+
+                    <div class="user-foods">
+                        <h3>Community Additions</h3>
+                        <ul id="userFoodsList"></ul>
+                    </div>
+
+                    <div class="add-food-form">
+                        <h3>Add Your Food</h3>
+                        <form id="addFoodForm">
+                            <input type="text" id="foodName" placeholder="Food name" required maxlength="100">
+                            <textarea id="foodDescription" placeholder="Short description (optional)" maxlength="200"></textarea>
+                            <button type="submit">Add Food</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Share the flavors of the world! Data is saved locally in your browser.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
