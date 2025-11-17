@@ -37,6 +37,15 @@ An interactive HTML5 web application that showcases typical foods from different
 
 #### Running Locally
 
+**Option 1: Static File (No Server Required)**
+```bash
+# Simply open index.html in your browser
+open index.html  # macOS
+start index.html # Windows
+xdg-open index.html # Linux
+```
+
+**Option 2: With Node.js Server**
 ```bash
 # Clone the repository
 git clone <repository-url>
@@ -44,13 +53,44 @@ git clone <repository-url>
 # Navigate to the folder
 cd FOODMAP
 
-# Open in browser (any of these methods)
-# Method 1: Double-click index.html
-# Method 2: Use a simple HTTP server
+# Install dependencies
+npm install
+
+# Start the server
+npm start
+
+# Visit http://localhost:3000
+```
+
+**Option 3: Python Simple Server**
+```bash
 python3 -m http.server 8000
 # Then visit http://localhost:8000
+```
 
-# Method 3: Use VS Code Live Server extension
+#### Deployment
+
+**Deploy to Railway**
+1. Push your code to GitHub
+2. Go to [Railway.app](https://railway.app)
+3. Click "New Project" → "Deploy from GitHub repo"
+4. Select your repository
+5. Railway will auto-detect and deploy!
+
+**Deploy to Vercel**
+```bash
+npm install -g vercel
+vercel
+```
+
+**Deploy to Netlify**
+- Just drag and drop the entire folder to [Netlify Drop](https://app.netlify.com/drop)
+- Or connect your GitHub repository
+
+**Deploy to GitHub Pages**
+```bash
+# Push to gh-pages branch
+git subtree push --prefix . origin gh-pages
 ```
 
 #### File Structure
@@ -60,6 +100,11 @@ FOODMAP/
 ├── index.html      # Main HTML structure
 ├── styles.css      # Styling and responsive design
 ├── app.js          # Application logic and interactivity
+├── server.js       # Node.js Express server for deployment
+├── package.json    # Node.js dependencies and scripts
+├── railway.json    # Railway deployment configuration
+├── vercel.json     # Vercel deployment configuration
+├── .gitignore      # Git ignore rules
 └── README.md       # This file
 ```
 
