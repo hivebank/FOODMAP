@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #ffecd2 100%);
     min-height: 100vh;
     color: #333;
     line-height: 1.6;
@@ -43,43 +43,110 @@ header p {
 
 /* Map Container */
 .map-container {
-    background: white;
-    border-radius: 15px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #fff9e6 100%);
+    border-radius: 25px;
     padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15), 0 5px 15px rgba(255,182,193,0.3);
+    border: 3px solid rgba(255,255,255,0.8);
 }
 
 .world-map {
     width: 100%;
     height: auto;
     display: block;
+    background: radial-gradient(circle at 30% 50%, #b3e5fc 0%, #81d4fa 100%);
+    border-radius: 20px;
+    padding: 1rem;
 }
 
+/* Different colors for each region - cute pastel palette */
 .region {
-    fill: #4CAF50;
     stroke: #fff;
-    stroke-width: 2;
+    stroke-width: 3;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+
+#north-america {
+    fill: #FFB6C1; /* Light Pink */
+}
+
+#south-america {
+    fill: #98D8C8; /* Mint Green */
+}
+
+#europe {
+    fill: #B19CD9; /* Lavender */
+}
+
+#africa {
+    fill: #FFD700; /* Golden Yellow */
+}
+
+#middle-east {
+    fill: #FFB347; /* Peach */
+}
+
+#asia {
+    fill: #87CEEB; /* Sky Blue */
+}
+
+#southeast-asia {
+    fill: #F0E68C; /* Khaki */
+}
+
+#oceania {
+    fill: #DDA0DD; /* Plum */
 }
 
 .region:hover {
-    fill: #45a049;
-    stroke-width: 3;
-    filter: drop-shadow(0 0 8px rgba(76, 175, 80, 0.6));
+    stroke-width: 5;
+    filter: drop-shadow(0 0 15px currentColor) brightness(1.1);
+    transform: scale(1.05) translateY(-2px);
 }
 
 .region.selected {
-    fill: #ff6b6b;
-    animation: pulse 1.5s ease-in-out infinite;
+    stroke: #FF1493;
+    stroke-width: 4;
+    animation: pulse-glow 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px currentColor) brightness(1.15);
 }
 
-@keyframes pulse {
+@keyframes pulse-glow {
     0%, 100% {
         transform: scale(1);
+        opacity: 1;
     }
     50% {
-        transform: scale(1.02);
+        transform: scale(1.03);
+        opacity: 0.9;
+    }
+}
+
+/* Wave decorations animation */
+.wave-decoration {
+    animation: float 3s ease-in-out infinite;
+}
+
+.wave-decoration:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.wave-decoration:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.wave-decoration:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
     }
 }
 
@@ -91,17 +158,43 @@ header p {
 .map-legend h3 {
     color: #555;
     font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.region-labels {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.label-hint {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.label-hint:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 /* Food Panel */
 .food-panel {
-    background: white;
-    border-radius: 15px;
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f7 100%);
+    border-radius: 25px;
     padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15), 0 5px 15px rgba(173,216,230,0.3);
     max-height: 600px;
     overflow-y: auto;
     position: relative;
+    border: 3px solid rgba(255,255,255,0.8);
 }
 
 .panel-header {
@@ -110,12 +203,22 @@ header p {
     align-items: center;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 3px solid #667eea;
+    border-bottom: 3px solid transparent;
+    background: linear-gradient(90deg, #FFB6C1, #98D8C8, #B19CD9) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, #FFB6C1, #98D8C8, #B19CD9) 1;
 }
 
 .panel-header h2 {
-    color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #FF1493 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .close-btn {
@@ -150,17 +253,19 @@ header p {
 }
 
 .panel-content ul li {
-    background: #f5f5f5;
+    background: linear-gradient(135deg, #fff 0%, #fef9ff 100%);
     padding: 0.75rem;
     margin-bottom: 0.5rem;
-    border-radius: 8px;
-    border-left: 4px solid #4CAF50;
-    transition: transform 0.2s;
+    border-radius: 15px;
+    border-left: 5px solid #4CAF50;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .panel-content ul li:hover {
-    transform: translateX(5px);
-    background: #ebebeb;
+    transform: translateX(8px) scale(1.02);
+    background: linear-gradient(135deg, #fff5f7 0%, #f0f0ff 100%);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .food-item-name {
@@ -176,23 +281,27 @@ header p {
 }
 
 .user-foods ul li {
-    border-left-color: #ff6b6b;
+    border-left-color: #FF69B4;
+    background: linear-gradient(135deg, #fff 0%, #fff0f5 100%);
 }
 
 .delete-food-btn {
     float: right;
-    background: #ff6b6b;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
     color: white;
     border: none;
     padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 0.85rem;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
 }
 
 .delete-food-btn:hover {
-    background: #ff5252;
+    background: linear-gradient(135deg, #ff5252 0%, #ff3838 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.5);
 }
 
 /* Add Food Form */
@@ -212,16 +321,19 @@ header p {
 #addFoodForm textarea {
     padding: 0.75rem;
     border: 2px solid #ddd;
-    border-radius: 8px;
+    border-radius: 15px;
     font-family: inherit;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #fff 0%, #fafafa 100%);
 }
 
 #addFoodForm input:focus,
 #addFoodForm textarea:focus {
     outline: none;
     border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
 }
 
 #addFoodForm textarea {
@@ -230,24 +342,26 @@ header p {
 }
 
 #addFoodForm button {
-    background: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 25px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 #addFoodForm button:hover {
-    background: #5568d3;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
 #addFoodForm button:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
 }
 
 /* Footer */
