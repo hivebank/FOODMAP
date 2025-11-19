@@ -74,6 +74,11 @@ const addFoodForm = document.getElementById('addFoodForm');
 const closePanel = document.getElementById('closePanel');
 const foodNameInput = document.getElementById('foodName');
 const foodDescriptionInput = document.getElementById('foodDescription');
+const foodImageInput = document.getElementById('foodImage');
+const imagePreview = document.getElementById('imagePreview');
+
+// Current image data
+let currentImageData = null;
 
 // Initialize the app
 function init() {
@@ -87,6 +92,9 @@ function init() {
 
     // Add form submit handler
     addFoodForm.addEventListener('submit', handleAddFood);
+
+    // Add image upload handler
+    foodImageInput.addEventListener('change', handleImageSelect);
 
     // Add touch support for mobile
     regions.forEach(region => {
@@ -148,18 +156,43 @@ function displayRegionFoods(region) {
 function createFoodListItem(food, isUserFood = false, index = null) {
     const li = document.createElement('li');
 
+    // Create content container
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'food-item-content';
+
+    // Text container
+    const textDiv = document.createElement('div');
+    textDiv.className = 'food-item-text';
+
     const nameSpan = document.createElement('span');
     nameSpan.className = 'food-item-name';
     nameSpan.textContent = food.name;
-
-    li.appendChild(nameSpan);
+    textDiv.appendChild(nameSpan);
 
     if (food.description) {
         const descDiv = document.createElement('div');
         descDiv.className = 'food-item-desc';
         descDiv.textContent = food.description;
-        li.appendChild(descDiv);
+        textDiv.appendChild(descDiv);
     }
+
+    contentDiv.appendChild(textDiv);
+
+    // Add image if exists
+    if (food.image) {
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'food-item-image-container';
+
+        const img = document.createElement('img');
+        img.src = food.image;
+        img.alt = food.name;
+        img.className = 'food-item-image';
+        imageContainer.appendChild(img);
+
+        contentDiv.appendChild(imageContainer);
+    }
+
+    li.appendChild(contentDiv);
 
     // Add delete button for user foods
     if (isUserFood) {
@@ -197,7 +230,8 @@ function handleAddFood(event) {
 
     userFoods[currentRegion].push({
         name: foodName,
-        description: foodDescription || ''
+        description: foodDescription || '',
+        image: currentImageData || null
     });
 
     // Save to localStorage
@@ -209,9 +243,78 @@ function handleAddFood(event) {
     // Clear form
     foodNameInput.value = '';
     foodDescriptionInput.value = '';
+    foodImageInput.value = '';
+    currentImageData = null;
+    imagePreview.innerHTML = '';
+    imagePreview.classList.remove('active');
 
     // Show success feedback
     showFeedback('Food added successfully!');
+}
+
+// Handle image selection
+function handleImageSelect(event) {
+    const file = event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    // Check file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+        alert('Image size must be less than 2MB');
+        foodImageInput.value = '';
+        return;
+    }
+
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+        alert('Please select an image file');
+        foodImageInput.value = '';
+        return;
+    }
+
+    // Read and preview the image
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        currentImageData = e.target.result;
+        displayImagePreview(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+// Display image preview
+function displayImagePreview(imageSrc) {
+    imagePreview.innerHTML = '';
+    imagePreview.classList.add('active');
+
+    const previewContainer = document.createElement('div');
+    previewContainer.className = 'preview-container';
+
+    const img = document.createElement('img');
+    img.src = imageSrc;
+    img.className = 'preview-image';
+    img.alt = 'Preview';
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-image-btn';
+    removeBtn.innerHTML = '&times;';
+    removeBtn.type = 'button';
+    removeBtn.onclick = removeImagePreview;
+
+    previewContainer.appendChild(img);
+    previewContainer.appendChild(removeBtn);
+    imagePreview.appendChild(previewContainer);
+}
+
+// Remove image preview
+function removeImagePreview() {
+    currentImageData = null;
+    foodImageInput.value = '';
+    imagePreview.innerHTML = '';
+    imagePreview.classList.remove('active');
 }
 
 // Delete user food

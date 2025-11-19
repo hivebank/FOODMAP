@@ -17,7 +17,7 @@
         <div class="container">
             <!-- World Map Section -->
             <div class="map-container">
-                <svg viewBox="0 0 1000 600" class="world-map" id="worldMap" preserveAspectRatio="xMidYMid meet">
+                <svg viewBox="0 0 1200 600" class="world-map" id="worldMap" preserveAspectRatio="xMidYMid meet">
                     <!-- Decorative Elements -->
                     <defs>
                         <filter id="shadow">
@@ -30,90 +30,108 @@
                                 <feMergeNode in="SourceGraphic"/>
                             </feMerge>
                         </filter>
+                        <!-- Ocean pattern -->
+                        <pattern id="ocean-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <circle cx="5" cy="5" r="2" fill="#5BA3D0" opacity="0.1"/>
+                            <circle cx="25" cy="25" r="2" fill="#5BA3D0" opacity="0.1"/>
+                        </pattern>
                     </defs>
 
-                    <!-- Ocean waves decoration -->
-                    <circle cx="150" cy="450" r="8" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
-                    <circle cx="400" cy="480" r="6" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
-                    <circle cx="650" cy="470" r="7" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
-                    <circle cx="850" cy="490" r="5" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
+                    <!-- Ocean background with pattern -->
+                    <rect width="1200" height="600" fill="url(#ocean-pattern)"/>
 
-                    <!-- North America - More detailed shape -->
+                    <!-- Ocean waves decoration -->
+                    <circle cx="150" cy="520" r="8" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
+                    <circle cx="400" cy="550" r="6" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
+                    <circle cx="700" cy="540" r="7" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
+                    <circle cx="1000" cy="560" r="5" class="wave-decoration" opacity="0.3" fill="#5BA3D0"/>
+
+                    <!-- North America - Detailed with Canada, USA, Mexico -->
                     <path id="north-america" class="region"
-                          d="M 80,120 Q 85,100 95,90 L 110,80 Q 125,75 140,78 L 155,82 Q 165,80 175,85
-                             L 185,90 Q 195,88 205,92 L 218,98 Q 230,95 240,100 L 255,108 Q 268,105 280,110
-                             L 295,118 Q 302,125 305,135 L 308,150 Q 310,165 308,180 L 305,195 Q 302,210 295,220
-                             L 285,230 Q 275,235 265,235 L 250,232 Q 238,230 228,235 L 215,242 Q 205,245 195,243
-                             L 180,240 Q 168,238 158,242 L 145,248 Q 135,245 128,238 L 118,228 Q 110,220 105,210
-                             L 98,195 Q 92,180 88,165 L 85,145 Q 82,130 80,120 Z"
+                          d="M 60,100 Q 65,85 75,75 L 85,68 Q 95,65 105,67 L 115,70 Q 120,68 128,70
+                             L 138,75 Q 145,73 155,76 L 168,82 Q 178,80 188,84 L 200,90 Q 210,88 220,92
+                             L 235,98 Q 248,96 260,100 L 275,106 Q 288,104 300,109 L 315,116 Q 328,114 340,120
+                             L 355,128 Q 365,132 372,140 L 378,152 Q 382,165 383,180 L 382,198 Q 380,215 375,230
+                             L 368,245 Q 360,258 350,268 L 338,276 Q 325,282 312,285 L 295,287 Q 280,286 268,290
+                             L 252,296 Q 240,298 230,296 L 218,293 Q 208,291 198,294 L 185,299 Q 175,301 165,299
+                             L 152,295 Q 142,292 133,296 L 120,302 Q 110,304 102,302 L 90,298 Q 82,294 76,288
+                             L 68,278 Q 63,266 60,252 L 58,235 Q 57,218 58,202 L 60,182 Q 62,162 64,145
+                             L 66,125 Q 63,112 60,100 Z"
                           data-region="North America" />
 
-                    <!-- South America - Cone shape -->
+                    <!-- South America - Detailed cone shape with distinctive features -->
                     <path id="south-america" class="region"
-                          d="M 260,260 Q 270,250 280,248 L 295,247 Q 308,248 318,253 L 328,260 Q 335,268 338,278
-                             L 342,295 Q 343,310 340,325 L 335,345 Q 332,360 328,375 L 322,395 Q 318,410 312,420
-                             L 305,430 Q 298,438 288,442 L 275,445 Q 265,445 258,440 L 248,433 Q 242,425 240,415
-                             L 238,400 Q 237,385 240,370 L 245,350 Q 248,335 250,320 L 253,300 Q 255,285 258,273
-                             L 260,260 Z"
+                          d="M 295,300 Q 305,292 318,290 L 335,289 Q 350,290 363,294 L 378,300 Q 390,307 398,316
+                             L 406,328 Q 412,342 415,357 L 417,375 Q 417,393 414,410 L 409,430 Q 404,448 397,465
+                             L 388,483 Q 378,498 366,510 L 352,520 Q 337,527 322,530 L 305,531 Q 290,530 277,526
+                             L 262,520 Q 252,512 245,502 L 238,488 Q 234,472 232,456 L 231,437 Q 231,418 234,400
+                             L 239,380 Q 245,362 252,346 L 261,328 Q 270,313 280,302 L 290,294 Q 295,300 295,300 Z"
                           data-region="South America" />
 
-                    <!-- Europe - Detailed peninsula -->
+                    <!-- Europe - Detailed with Mediterranean and Scandinavian features -->
                     <path id="europe" class="region"
-                          d="M 470,110 Q 478,105 488,103 L 502,102 Q 515,103 528,107 L 542,113 Q 555,118 565,125
-                             L 575,133 Q 580,140 582,148 L 583,160 Q 582,172 578,182 L 572,192 Q 565,200 555,205
-                             L 542,208 Q 528,210 515,208 L 500,205 Q 488,202 478,196 L 468,188 Q 462,180 460,170
-                             L 458,155 Q 460,140 463,128 L 468,118 Q 470,110 470,110 Z"
+                          d="M 530,95 Q 538,88 548,85 L 562,83 Q 578,84 592,88 L 608,94 Q 622,100 634,108
+                             L 648,118 Q 658,128 665,140 L 670,154 Q 673,168 673,183 L 671,200 Q 667,215 660,228
+                             L 650,240 Q 638,250 624,257 L 608,262 Q 592,265 577,265 L 560,263 Q 545,260 532,254
+                             L 518,246 Q 508,237 502,226 L 497,212 Q 495,198 495,184 L 497,168 Q 500,152 506,138
+                             L 514,123 Q 522,108 530,95 Z"
                           data-region="Europe" />
 
-                    <!-- Africa - Distinctive shape -->
+                    <!-- Africa - Detailed with distinctive northern bulge and southern taper -->
                     <path id="africa" class="region"
-                          d="M 490,205 Q 500,200 512,198 L 528,197 Q 542,198 555,202 L 568,208 Q 578,213 586,220
-                             L 595,230 Q 600,242 602,255 L 603,275 Q 602,295 598,312 L 592,330 Q 586,348 578,362
-                             L 568,377 Q 558,388 545,395 L 528,400 Q 512,402 498,400 L 482,395 Q 472,388 465,378
-                             L 458,365 Q 455,350 455,335 L 456,315 Q 458,295 462,278 L 468,258 Q 475,240 482,225
-                             L 488,213 Q 490,205 490,205 Z"
+                          d="M 545,215 Q 555,210 568,208 L 585,207 Q 602,208 618,212 L 635,218 Q 650,225 663,234
+                             L 677,245 Q 688,258 695,273 L 700,292 Q 703,312 703,332 L 701,355 Q 698,378 692,399
+                             L 683,422 Q 673,443 660,461 L 645,477 Q 628,490 610,499 L 590,506 Q 570,510 550,510
+                             L 528,507 Q 510,502 494,494 L 478,484 Q 466,472 458,458 L 451,441 Q 448,422 447,403
+                             L 448,382 Q 450,362 455,343 L 462,322 Q 471,302 482,285 L 495,268 Q 510,252 525,240
+                             L 538,228 Q 545,215 545,215 Z"
                           data-region="Africa" />
 
-                    <!-- Middle East - Bridge region -->
+                    <!-- Middle East - Bridge between continents -->
                     <path id="middle-east" class="region"
-                          d="M 595,195 Q 603,192 612,191 L 625,191 Q 638,192 648,196 L 658,202 Q 665,208 668,216
-                             L 670,228 Q 669,240 665,250 L 658,258 Q 650,264 640,267 L 627,268 Q 615,267 605,263
-                             L 595,257 Q 590,250 588,242 L 587,230 Q 588,218 591,208 L 595,200 Q 595,195 595,195 Z"
+                          d="M 690,200 Q 700,196 712,194 L 728,193 Q 745,194 760,198 L 776,204 Q 788,210 796,219
+                             L 802,230 Q 806,243 806,257 L 804,273 Q 800,287 793,299 L 783,309 Q 771,317 757,322
+                             L 741,325 Q 725,326 711,323 L 696,318 Q 686,311 679,302 L 673,290 Q 670,276 670,262
+                             L 672,246 Q 676,231 682,218 L 690,207 Q 690,200 690,200 Z"
                           data-region="Middle East" />
 
-                    <!-- Asia - Large detailed continent -->
+                    <!-- Asia - Large detailed continent with Far East features -->
                     <path id="asia" class="region"
-                          d="M 650,80 Q 660,75 672,72 L 690,70 Q 710,70 728,73 L 748,78 Q 768,83 785,90
-                             L 805,100 Q 822,110 835,122 L 848,137 Q 855,150 858,165 L 860,185 Q 858,205 852,222
-                             L 843,238 Q 832,250 818,258 L 800,265 Q 780,270 760,270 L 735,268 Q 715,265 698,258
-                             L 680,248 Q 668,238 660,225 L 653,210 Q 650,193 650,178 L 651,158 Q 653,138 657,122
-                             L 663,105 Q 668,92 675,85 L 650,80 Z"
+                          d="M 770,60 Q 782,54 796,50 L 815,47 Q 838,46 860,49 L 885,54 Q 910,60 933,69
+                             L 958,80 Q 980,93 998,108 L 1015,126 Q 1028,145 1036,166 L 1042,190 Q 1045,215 1043,240
+                             L 1038,268 Q 1030,293 1018,315 L 1003,335 Q 985,352 964,365 L 940,376 Q 914,384 887,388
+                             L 858,390 Q 830,388 804,382 L 778,373 Q 756,362 738,348 L 722,332 Q 710,314 702,295
+                             L 696,273 Q 693,250 693,227 L 695,202 Q 699,178 706,156 L 716,133 Q 728,111 742,93
+                             L 758,77 Q 770,66 770,60 Z"
                           data-region="Asia" />
 
-                    <!-- Southeast Asia - Island cluster -->
+                    <!-- Southeast Asia - Island archipelago cluster -->
                     <path id="southeast-asia" class="region"
-                          d="M 760,280 Q 768,277 778,276 L 792,276 Q 808,277 822,281 L 838,287 Q 850,293 858,301
-                             L 865,312 Q 868,323 868,335 L 866,350 Q 862,362 855,371 L 845,378 Q 833,383 820,385
-                             L 805,385 Q 790,383 778,378 L 765,371 Q 757,363 753,353 L 750,340 Q 750,327 753,316
-                             L 758,303 Q 760,293 760,280 Z"
+                          d="M 900,330 Q 910,326 922,324 L 938,323 Q 956,324 972,328 L 990,334 Q 1004,341 1014,350
+                             L 1023,362 Q 1029,375 1031,390 L 1031,407 Q 1029,424 1023,439 L 1014,452 Q 1003,463 989,471
+                             L 973,477 Q 956,481 939,482 L 920,481 Q 903,478 888,472 L 873,464 Q 862,454 854,442
+                             L 848,428 Q 845,412 845,396 L 847,378 Q 851,362 858,348 L 868,336 Q 880,328 892,323
+                             L 900,330 Z"
                           data-region="Southeast Asia" />
 
-                    <!-- Oceania - Australia and islands -->
+                    <!-- Oceania - Australia with distinctive shape and islands -->
                     <path id="oceania" class="region"
-                          d="M 820,400 Q 830,397 842,396 L 858,396 Q 875,397 890,401 L 905,407 Q 915,413 922,421
-                             L 928,432 Q 930,443 929,455 L 926,470 Q 921,482 913,491 L 902,498 Q 888,503 873,505
-                             L 855,505 Q 838,503 825,498 L 812,491 Q 804,483 800,473 L 797,460 Q 797,447 800,436
-                             L 806,423 Q 812,413 820,407 L 820,400 Z"
+                          d="M 970,430 Q 982,426 996,424 L 1015,423 Q 1037,424 1057,428 L 1078,434 Q 1095,441 1108,451
+                             L 1119,463 Q 1127,477 1131,493 L 1133,511 Q 1131,530 1125,547 L 1115,562 Q 1102,574 1086,583
+                             L 1067,590 Q 1046,595 1025,596 L 1002,595 Q 981,591 962,584 L 943,575 Q 929,564 918,551
+                             L 909,536 Q 904,519 902,501 L 902,481 Q 905,462 911,445 L 921,430 Q 933,417 947,408
+                             L 962,401 Q 970,430 970,430 Z"
                           data-region="Oceania" />
 
                     <!-- Cute food icons scattered around -->
-                    <text x="150" y="70" font-size="20" opacity="0.4">🍔</text>
-                    <text x="280" y="480" font-size="18" opacity="0.4">🌮</text>
-                    <text x="520" y="90" font-size="18" opacity="0.4">🍕</text>
-                    <text x="550" y="420" font-size="18" opacity="0.4">🥘</text>
-                    <text x="680" y="190" font-size="18" opacity="0.4">🍜</text>
-                    <text x="800" y="390" font-size="18" opacity="0.4">🍣</text>
-                    <text x="880" y="520" font-size="18" opacity="0.4">🥧</text>
+                    <text x="180" y="60" font-size="24" opacity="0.5">🍔</text>
+                    <text x="320" y="560" font-size="22" opacity="0.5">🌮</text>
+                    <text x="600" y="80" font-size="22" opacity="0.5">🍕</text>
+                    <text x="620" y="520" font-size="22" opacity="0.5">🥘</text>
+                    <text x="750" y="240" font-size="20" opacity="0.5">🥙</text>
+                    <text x="920" y="220" font-size="22" opacity="0.5">🍜</text>
+                    <text x="960" y="450" font-size="22" opacity="0.5">🍣</text>
+                    <text x="1050" y="580" font-size="22" opacity="0.5">🥧</text>
                 </svg>
 
                 <div class="map-legend">
@@ -149,6 +167,16 @@
                         <form id="addFoodForm">
                             <input type="text" id="foodName" placeholder="Food name" required maxlength="100">
                             <textarea id="foodDescription" placeholder="Short description (optional)" maxlength="200"></textarea>
+
+                            <div class="image-upload-container">
+                                <label for="foodImage" class="image-upload-label">
+                                    <span class="upload-icon">📷</span>
+                                    <span class="upload-text">Add Photo (optional)</span>
+                                    <input type="file" id="foodImage" accept="image/*" class="image-input">
+                                </label>
+                                <div id="imagePreview" class="image-preview"></div>
+                            </div>
+
                             <button type="submit">Add Food</button>
                         </form>
                     </div>
